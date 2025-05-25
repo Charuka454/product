@@ -14,7 +14,8 @@ if( isset($_POST["submit"])){
     $query ="INSERT INTO products (name,price,file) VALUES ('$pName','$price','$fileName')";
    $quuu = mysqli_query($con,$query);
    if(move_uploaded_file($fileTmpName,$folder)){
-    echo"file uplode";
+    
+    echo"<h2>file  uplode</h2>";
    }else{
      echo"<h2>file not uplode</h2>";
    }
@@ -23,7 +24,7 @@ if( isset($_POST["submit"])){
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <style>
+    <style> 
 input[type=text], select {
   width: 100%;
   padding: 12px 20px;
@@ -54,6 +55,17 @@ div {
   background-color: #f2f2f2;
   padding: 20px;
 }
+a{
+    width: 100%;
+   background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+ 
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
 </style>
 <head>
     <meta charset="UTF-8">
@@ -61,8 +73,9 @@ div {
     <title>Document</title>
 </head>
 <body>
+
     <div>
-    <form method="POST" enctype="multipart/form-data">
+    <form  method="POST"  enctype="multipart/form-data" >
         <label for="Pname">Product Name</label>
         <input type="text" id="Pname" name="Pname" placeholder="Product name..">
         <label for="Pprice">Product Price</label>
@@ -70,11 +83,12 @@ div {
         <label for="Ppicture">Product Picture</label><br>
         <input type="file" name="product">
         <input type="submit" value="Submit" name="submit">
-
     </form>
-    </div>
     
-  
-   
+    </div>
+    <br>
+    <br>
+    <a href="product.php" >View Product</a>
+      
 </body>
 </html>
