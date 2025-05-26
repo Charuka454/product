@@ -24,7 +24,12 @@ if( isset($_POST["submit"])){
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <style> 
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <style> 
 input[type=text], select {
   width: 100%;
   padding: 12px 20px;
@@ -67,10 +72,7 @@ a{
   cursor: pointer;
 }
 </style>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
 </head>
 <body>
 

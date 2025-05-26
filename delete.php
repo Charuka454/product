@@ -1,6 +1,4 @@
-<?php
-include("config.php");
-?>
+<?php include("config.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,7 +79,7 @@ include("config.php");
     }
 
     .card button:hover {
-      background-color: #4338ca;
+      background-color:rgb(250, 9, 89);
     }
 
     @media (max-width: 600px) {
@@ -93,13 +91,22 @@ include("config.php");
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <?php include"header.php"; ?>
-<br>
-<br>
+<?php include "header.php"; ?>
+<br><br>
+
 <div class="products-container">
   <?php
+    // Handle delete request
+    if (isset($_POST["delete"]) && isset($_POST["product_id"])) {
+      $id = intval($_POST["product_id"]);
+      $dqur = "DELETE FROM products WHERE id = $id";
+      mysqli_query($con, $dqur);
+    }
+
+    // Fetch updated product list
     $query = "SELECT * FROM products";
     $quuu = mysqli_query($con, $query);
+
     while ($row = mysqli_fetch_assoc($quuu)) {
   ?>
     <div class="card">
@@ -107,11 +114,13 @@ include("config.php");
       <div class="card-content">
         <h1><?php echo $row["name"]; ?></h1>
         <p class="price">$<?php echo $row["price"]; ?>-rs</p>
-        <button>Add to Cart</button>
+        <form method="post">
+          <input type="hidden" name="product_id" value="<?php echo $row["id"]; ?>">
+          <button type="submit" name="delete">Delete Item</button>
+        </form>
       </div>
     </div>
   <?php } ?>
 </div>
-
 </body>
 </html>
