@@ -81,6 +81,7 @@
     .card button:hover {
       background-color:rgb(250, 9, 89);
     }
+  
 
     @media (max-width: 600px) {
       .card img {
@@ -94,8 +95,10 @@
 <?php include "header.php"; ?>
 <br><br>
 
-<div class="products-container">
+<div  class="products-container">
   <?php
+
+   
     // Handle delete request
     if (isset($_POST["delete"]) && isset($_POST["product_id"])) {
       $id = intval($_POST["product_id"]);
@@ -109,14 +112,15 @@
 
     while ($row = mysqli_fetch_assoc($quuu)) {
   ?>
-    <div class="card">
+    <div  class="card">
       <img src="img/<?php echo $row["file"]; ?>" alt="Product Image">
       <div class="card-content">
         <h1><?php echo $row["name"]; ?></h1>
-        <p class="price">$<?php echo $row["price"]; ?>-rs</p>
+        <p class="price">=<?php echo $row["price"]; ?>-rs</p>
         <form method="post">
           <input type="hidden" name="product_id" value="<?php echo $row["id"]; ?>">
           <button type="submit" name="delete">Delete Item</button>
+        
         </form>
       </div>
     </div>

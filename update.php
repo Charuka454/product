@@ -11,13 +11,15 @@ if( isset($_POST["submit"])){
     $fileName = $_FILES["product"]["name"];
     $fileTmpName = $_FILES["product"]["tmp_name"];
     $folder = 'img/'.$fileName;
-    $query ="INSERT INTO products (name,price,file) VALUES ('$pName','$price','$fileName')";
+    $query ="UPDATE products
+             SET price = '$price' , file = '$fileName'
+             WHERE name='$pName';";
    $quuu = mysqli_query($con,$query);
    if(move_uploaded_file($fileTmpName,$folder)){
     
-    echo"<h2>file  uplode</h2>";
+    echo"<h2>Update</h2>";
    }else{
-     echo"<h2>file not uplode</h2>";
+     echo"<h2>Not Update</h2>";
    }
     
 }

@@ -106,7 +106,7 @@ include("config.php");
       <img src="img/<?php echo $row["file"]; ?>" alt="Product Image">
       <div class="card-content">
         <h1><?php echo $row["name"]; ?></h1>
-        <p class="price">$<?php echo $row["price"]; ?>-rs</p>
+        <p class="price">=<?php echo $row["price"]; ?>-rs</p>
         <button>Add to Cart</button>
       </div>
     </div>
