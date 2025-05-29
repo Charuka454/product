@@ -1,97 +1,108 @@
 <?php 
-
 include("config.php");
 
-if( isset($_POST["submit"])){
-
-    //for product
+if (isset($_POST["submit"])) {
     $pName = $_POST['Pname'];
     $price = $_POST['Pprice'];
 
     $fileName = $_FILES["product"]["name"];
     $fileTmpName = $_FILES["product"]["tmp_name"];
-    $folder = 'img/'.$fileName;
-    $query ="INSERT INTO products (name,price,file) VALUES ('$pName','$price','$fileName')";
-   $quuu = mysqli_query($con,$query);
-   if(move_uploaded_file($fileTmpName,$folder)){
-    
-    echo"<h2>file  uplode</h2>";
-   }else{
-     echo"<h2>file not uplode</h2>";
-   }
-    
+    $folder = 'img/' . $fileName;
+
+    $query = "INSERT INTO products (name, price, file) VALUES ('$pName', '$price', '$fileName')";
+    $quuu = mysqli_query($con, $query);
+
+    if (move_uploaded_file($fileTmpName, $folder)) {
+        echo "<h2 style='color: lightgreen;'>File uploaded</h2>";
+    } else {
+        echo "<h2 style='color: red;'>File not uploaded</h2>";
+    }
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-        <style> 
-input[type=text], select {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
+    <title>Add Product</title>
 
-input[type=submit] {
-  width: 100%;
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
+    <!-- ✅ Link your external header styles -->
+    <link rel="stylesheet" href="style.css">
 
-input[type=submit]:hover {
-  background-color: #45a049;
-}
+    <style>
+    /* Extra styles for this specific form */
+    .form-container {
+        border-radius: 8px;
+        background-color:rgb(29, 25, 25);
+        padding: 20px;
+        width: 90%;
+        max-width: 600px;
+        margin: 40px auto;
+    }
 
-div {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-}
-a{
-    width: 100%;
-   background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
- 
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-</style>
+    input[type=text], input[type=file], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0 16px;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
 
+    input[type=submit] {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin-top: 8px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+    a.button-link {
+        display: block;
+        width: fit-content;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 30px auto;
+        border-radius: 4px;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    a.button-link:hover {
+        background-color: #45a049;
+    }
+    </style>
 </head>
 <body>
 
-    <div>
-    <form  method="POST"  enctype="multipart/form-data" >
-        <label for="Pname">Product Name</label>
-        <input type="text" id="Pname" name="Pname" placeholder="Product name..">
-        <label for="Pprice">Product Price</label>
-        <input type="text" id="Pprice" name="Pprice" placeholder="Product price..">
-        <label for="Ppicture">Product Picture</label><br>
-        <input type="file" name="product">
-        <input type="submit" value="Submit" name="submit">
-    </form>
-    
+    <!-- ✅ Include your styled header -->
+    <?php include("header.php"); ?>
+
+    <div class="form-container">
+        <form method="POST" enctype="multipart/form-data">
+            <label for="Pname">Product Name</label>
+            <input type="text" id="Pname" name="Pname" placeholder="Product name..." required>
+
+            <label for="Pprice">Product Price</label>
+            <input type="text" id="Pprice" name="Pprice" placeholder="Product price..." required>
+
+            <label for="product">Product Picture</label>
+            <input type="file" id="product" name="product" required>
+
+            <input type="submit" value="Submit" name="submit">
+        </form>
     </div>
-    <br>
-    <br>
-    <a href="product.php" >View Product</a>
-  
-      
+
+    <a href="product.php" class="button-link">View Products</a>
+
 </body>
 </html>
